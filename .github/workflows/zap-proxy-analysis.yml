@@ -13,8 +13,16 @@ jobs:
         uses: actions/checkout@v2
         with:
           ref: master
-      - name: "ZAP API Scan"
+      - name: "ZAP API Scan http://testphp.vulnweb.com"
         uses: zaproxy/action-api-scan@v0.1.0
         with:
-        # https://github.com/OWASP/OWASP-VWAD/blob/master/src/data/online.json
-          target: 'http://testphp.vulnweb.com'   
+          token: ${{ secrets.GITHUB_TOKEN }}
+          docker_name: 'owasp/zap2docker-stable'
+          # https://github.com/OWASP/OWASP-VWAD/blob/master/src/data/online.json
+          target: 'http://testphp.vulnweb.com'
+          rules_file_name: '.zap/rules.tsv'
+          cmd_options: '-a' 
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+          sarif_file: results.sarif    
