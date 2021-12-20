@@ -18,11 +18,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           docker_name: 'owasp/zap2docker-stable'
-          # https://github.com/OWASP/OWASP-VWAD/blob/master/src/data/online.json
           target: 'http://testphp.vulnweb.com'
           rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a' 
-      - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v1
-        with:
-          sarif_file: results.sarif    
+          cmd_options: '-a'    
