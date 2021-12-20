@@ -18,5 +18,3 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           target: 'https://www.zaproxy.org/'
-          rules_file_name: '.zap/rules.tsv'
-          cmd_options: '-a' 
